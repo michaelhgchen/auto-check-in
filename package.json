@@ -1,0 +1,11 @@
+{
+  "name": "sw-check-in",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:michaelhgchen/sw-check-in.git",
+  "author": "Michael Chen <michaelhgchen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "1.5"
+  }
+}
