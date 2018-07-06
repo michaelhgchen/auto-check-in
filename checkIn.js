@@ -6,10 +6,10 @@ const TYPING_DELAY = 20;
 const browserConfig = process.env.NODE_ENV === 'production' ?
   {} : {
     headless: false,
-    slowMo: 250
+    slowMo: 100
   };
 
-export async function checkInManually(token, firstName, lastName) {
+async function checkInManually(token, firstName, lastName) {
   const browser = await puppeteer.launch(browserConfig);
 
   const page = await browser.newPage();
@@ -21,8 +21,13 @@ export async function checkInManually(token, firstName, lastName) {
 
   await Promise.all([
     page.waitForNavigation(),
-    page.$eval('form.confirmation-number-form', form => form.submit()),
+    page.click('#form-mixin--submit-button'),
   ]);
 
-  await browser.close();
+  await Promise.all([
+    page.waitForNavigation(),
+    page.click('.air-check-in-review-results--check-in-button'),
+  ]);
 }
+
+checkInManually('KLG8PR', 'Michael', 'Chen')
